@@ -9,7 +9,7 @@ const AddSong = (props) => {
     const [songTitle, setSongTitle] = useState('')
     const [link, setLink] = useState('')
     const [genre, setGenre] = useState('')
-    const [addedby, setAddedBy] = useState('')
+    const [addedBy, setAddedBy] = useState('')
     const [errors, setErrors] = useState({})
 
     const submitHandler = (event) => {
