@@ -2,8 +2,10 @@ import * as React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
+  Link,
   createTheme,
   ThemeProvider,
   TextField,
@@ -43,10 +45,21 @@ const AddSong = (props) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <Link component={RouterLink} href="#" underline="none" to={`/`}>
+            Back
+          </Link>
+        </div>
         <h1>Add a Song!</h1>
         <form onSubmit={submitHandler}>
           <Box
-            component="form"
             sx={{
               "& .MuiTextField-root": { m: 1, width: "25ch" },
             }}
