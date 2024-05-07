@@ -24,6 +24,12 @@ const Details = () => {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/playlists/${id}`)
@@ -41,7 +47,7 @@ const Details = () => {
     axios
       .delete(`http://localhost:8000/api/playlists/${id}`)
       .then(() => {
-        navigate("/");
+        navigate("/mainDisplay");
       })
       .catch((err) => {
         console.log(err);
@@ -61,78 +67,80 @@ const Details = () => {
   }));
 
   return (
-    <div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <Link
-              component={RouterLink}
-              href="#"
-              underline="none"
-              to={`/mainDisplay`}
+    <ThemeProvider theme={darkTheme}>
+      <div>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
             >
-              Back
-            </Link>
-            <Link
-              component={RouterLink}
-              href="#"
-              underline="none"
-              to={`/update/${id}`}
+              <Link
+                component={RouterLink}
+                href="#"
+                underline="none"
+                to={`/mainDisplay`}
+              >
+                Back
+              </Link>
+              <Link
+                component={RouterLink}
+                href="#"
+                underline="none"
+                to={`/update/${id}`}
+              >
+                Update
+              </Link>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                height: "100vh",
+              }}
             >
-              Update
-            </Link>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              height: "100vh",
-            }}
-          >
-            <Box>
-              <List dense={dense}>
-                <ListItem>
-                  <ListItemText
-                    primary={song.songTitle}
-                    secondary={secondary ? "Secondary text" : null}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary={song.link}
-                    secondary={secondary ? "Secondary text" : null}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary={song.genre}
-                    secondary={secondary ? "Secondary text" : null}
-                  />
-                </ListItem>
-                <ListItem>
-                  <ListItemText
-                    primary={song.addedBy}
-                    secondary={secondary ? "Secondary text" : null}
-                  />
-                </ListItem>
-              </List>
+              <Box>
+                <List dense={dense}>
+                  <ListItem>
+                    <ListItemText
+                      primary={song.songTitle}
+                      secondary={secondary ? "Secondary text" : null}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary={song.link}
+                      secondary={secondary ? "Secondary text" : null}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary={song.genre}
+                      secondary={secondary ? "Secondary text" : null}
+                    />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemText
+                      primary={song.addedBy}
+                      secondary={secondary ? "Secondary text" : null}
+                    />
+                  </ListItem>
+                </List>
 
-              <Button onClick={deleteHandler}>Delete Song</Button>
-            </Box>
+                <Button onClick={deleteHandler}>Delete Song</Button>
+              </Box>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </ThemeProvider>
   );
 };
 

@@ -2,11 +2,13 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Box,
+  Link,
+  TextField,
   createTheme,
   ThemeProvider,
-  TextField,
   Button,
 } from "@mui/material";
 
@@ -19,6 +21,12 @@ const Update = (props) => {
   const [genre, setGenre] = useState("");
   const [addedBy, setAddedBy] = useState("");
   const [errors, setErrors] = useState({});
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   useEffect(() => {
     axios
@@ -51,80 +59,99 @@ const Update = (props) => {
   };
 
   return (
-    <div>
-      <h1>Update a Song</h1>
-      <form onSubmit={submitHandler}>
-        <Box
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch" },
+    <ThemeProvider theme={darkTheme}>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
           }}
-          noValidate
-          autoComplete="off"
         >
-          {/* Song Title */}
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Song Title"
-              type="text"
-              value={songTitle}
-              onChange={(event) => setSongTitle(event.target.value)}
-              InputLabelProps={{ style: { color: "white" } }}
-              InputProps={{ style: { color: "white" } }}
-            />
-            {errors.songTitle && <p>{errors.songTitle.message}</p>}
-          </div>
+          <Link
+            component={RouterLink}
+            href="#"
+            underline="none"
+            to={`/mainDisplay`}
+          >
+            Back
+          </Link>
+        </div>
+        <h1>Update a Song</h1>
+        <form onSubmit={submitHandler}>
+          <Box
+            sx={{
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            {/* Song Title */}
+            <div>
+              <TextField
+                required
+                id="outlined-required"
+                label="Song Title"
+                type="text"
+                value={songTitle}
+                onChange={(event) => setSongTitle(event.target.value)}
+                InputLabelProps={{ style: { color: "white" } }}
+                InputProps={{ style: { color: "white" } }}
+              />
+              {errors.songTitle && <p>{errors.songTitle.message}</p>}
+            </div>
 
-          {/* Link */}
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Link"
-              type="text"
-              value={link}
-              onChange={(event) => setLink(event.target.value)}
-              InputLabelProps={{ style: { color: "white" } }}
-              InputProps={{ style: { color: "white" } }}
-            />
-            {errors.link && <p>{errors.link.message}</p>}
-          </div>
+            {/* Link */}
+            <div>
+              <TextField
+                required
+                id="outlined-required"
+                label="Link"
+                type="text"
+                value={link}
+                onChange={(event) => setLink(event.target.value)}
+                InputLabelProps={{ style: { color: "white" } }}
+                InputProps={{ style: { color: "white" } }}
+              />
+              {errors.link && <p>{errors.link.message}</p>}
+            </div>
 
-          {/* Genre */}
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Genre"
-              type="text"
-              value={genre}
-              onChange={(event) => setGenre(event.target.value)}
-              InputLabelProps={{ style: { color: "white" } }}
-              InputProps={{ style: { color: "white" } }}
-            />
-            {errors.genre && <p>{errors.genre.message}</p>}
-          </div>
+            {/* Genre */}
+            <div>
+              <TextField
+                required
+                id="outlined-required"
+                label="Genre"
+                type="text"
+                value={genre}
+                onChange={(event) => setGenre(event.target.value)}
+                InputLabelProps={{ style: { color: "white" } }}
+                InputProps={{ style: { color: "white" } }}
+              />
+              {errors.genre && <p>{errors.genre.message}</p>}
+            </div>
 
-          {/* Added By */}
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Added By"
-              type="text"
-              value={addedBy}
-              onChange={(event) => setAddedBy(event.target.value)}
-              InputLabelProps={{ style: { color: "white" } }}
-              InputProps={{ style: { color: "white" } }}
-            />
-            {errors.addedBy && <p>{errors.addedBy.message}</p>}
-          </div>
-        </Box>
+            {/* Added By */}
+            <div>
+              <TextField
+                required
+                id="outlined-required"
+                label="Added By"
+                type="text"
+                value={addedBy}
+                onChange={(event) => setAddedBy(event.target.value)}
+                InputLabelProps={{ style: { color: "white" } }}
+                InputProps={{ style: { color: "white" } }}
+              />
+              {errors.addedBy && <p>{errors.addedBy.message}</p>}
+            </div>
+          </Box>
 
-        <button>UPDATE</button>
-      </form>
-    </div>
+          <Button type="submit">UPDATE</Button>
+        </form>
+      </div>
+    </ThemeProvider>
   );
 };
 
