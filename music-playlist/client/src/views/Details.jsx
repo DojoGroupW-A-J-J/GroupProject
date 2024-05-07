@@ -69,12 +69,17 @@ const Details = () => {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between", // Spreads the child elements across the available space
-              alignItems: "center", // Aligns items vertically in the center
+              justifyContent: "space-between",
+              alignItems: "center",
               width: "100%",
             }}
           >
-            <Link component={RouterLink} href="#" underline="none" to={`/`}>
+            <Link
+              component={RouterLink}
+              href="#"
+              underline="none"
+              to={`/mainDisplay`}
+            >
               Back
             </Link>
             <Link
