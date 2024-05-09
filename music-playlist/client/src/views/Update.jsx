@@ -49,7 +49,7 @@ const Update = (props) => {
     axios
       .put(`http://localhost:8000/api/playlists/${id}`, newSong)
       .then((res) => {
-        navigate(`/mainDisplay`);
+        navigate(-1);
         console.log(res);
       })
       .catch((err) => {
@@ -73,7 +73,7 @@ const Update = (props) => {
             component={RouterLink}
             href="#"
             underline="none"
-            to={`/mainDisplay`}
+            to={`../../details/${id}`}
           >
             Back
           </Link>
